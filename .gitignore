@@ -1,0 +1,9 @@
+*.pyc
+spectrum/
+spectrum/*
+toneinput/
+toneinput/*
+PySide-1.2.4/*
+PySide-1.2.4
+teensy_fft_hardware.fzz
+PySide-1.2.4.tar.gz
