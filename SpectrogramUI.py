@@ -13,7 +13,8 @@ from matplotlib.figure import Figure
 from matplotlib.gridspec import GridSpec
 from matplotlib.ticker import MultipleLocator, FuncFormatter
 import numpy as np
-from PySide import QtCore, QtGui
+from PySide import QtCore, QtGui, QtTest
+
 
 VERSION = 'Spectrogram v1.0'
 
@@ -201,7 +202,7 @@ class MainWindow(QtGui.QMainWindow):
 		deviceCombo = QtGui.QComboBox()
 		for device in sorted(self.devices, lambda a, b: cmp(a.get_name(), b.get_name())):
 			deviceCombo.addItem(device.get_name(), userData=device)
-		deviceBtn = QtGui.QPushButton('Open')
+		deviceBtn = QtGui.QPushButton('Open It!')
 		deviceBtn.clicked.connect(self._deviceButton)
 		self.deviceCombo = deviceCombo
 		self.deviceBtn = deviceBtn
