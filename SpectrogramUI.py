@@ -14,9 +14,16 @@ from matplotlib.gridspec import GridSpec
 from matplotlib.ticker import MultipleLocator, FuncFormatter
 import numpy as np
 from PySide import QtCore, QtGui, QtTest
+import datetime, threading, time
 
 
 VERSION = 'Spectrogram v1.0'
+
+next_call = time.time()
+filename = "decibels.txt"
+target = open(filename, 'w')
+maxMags = 0.0
+stopTimer = False
 
 # Add global version number/name
 
@@ -109,6 +116,7 @@ class SpectrogramCanvas(FigureCanvas):
 			self.window.updateStatus()
 
 	def _update(self, *fargs):
+		global maxMags
 		# Animation function called 10 times a second to update graphs with recent data.
 		# Get a list of recent magnitudes from the open device.
 		mags = self.window.getMagnitudes()
@@ -127,10 +135,33 @@ class SpectrogramCanvas(FigureCanvas):
 			self.magnitudes[0] = mags/100.0
 			# Update spectrogram image data.
 			self.spectPlot.set_array(self.magnitudes)
+			maxMags = max(mags)
 			return (self.histPlot, self.spectPlot)
 		else:
 			return ()
 
+def foo():
+	global maxMags
+ 	global next_call
+	global target
+	global stopTimer
+	#print datetime.datetime.now()
+	
+	
+	next_call = next_call+5
+	if not stopTimer:
+		target.write("%s : %s \n" % (datetime.datetime.now(), maxMags) )
+		print "%s : %s \n" % (datetime.datetime.now(), maxMags)
+		threading.Timer( next_call - time.time(), foo ).start()
+		target.flush()
+
+foo()
+
+def myExitHandler():
+	global target
+	global stopTimer
+	stopTimer = True
+	target.close()
 
 class MainWindow(QtGui.QMainWindow):
 	def __init__(self, devices):

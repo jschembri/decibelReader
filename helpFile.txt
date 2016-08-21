@@ -1,0 +1,1 @@
+1) To get Anacode working I needed to put it in the environmental /etc/environment file
