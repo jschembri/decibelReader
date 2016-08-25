@@ -151,7 +151,7 @@ def foo():
 	next_call = next_call+5
 	if not stopTimer:
 		target.write("%s : %s \n" % (datetime.datetime.now(), maxMags) )
-		print "%s : %s \n" % (datetime.datetime.now(), maxMags)
+		print "%s : %s" % (datetime.datetime.now(), maxMags)
 		threading.Timer( next_call - time.time(), foo ).start()
 		target.flush()
 
