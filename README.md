@@ -2,6 +2,8 @@
 
 Code in support of the ['FFT: Fun with Fourier Transforms' guide](http://learn.adafruit.com/fft-fun-with-fourier-transforms) on the [Adafruit learning system](http://learn.adafruit.com/).
 
+@reboot sleep 60 && stdbuf -i0 -o0 -e0 env DISPLAY=:0 /home/jschembri/anaconda2/bin/python /home/jschembri/teensy/FFT/adafruit_guide_fft-master/Spectrogram.py >> /home/jschembri/teensy/FFT/adafruit_guide_fft-master/decibelsCron.txt
+
 ## License
 
 The MIT License (MIT)
